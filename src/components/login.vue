@@ -1,11 +1,23 @@
 <template>
-	<div>
-		<span>帳號:</span
-		><input type="text" placeholder="請輸入帳號" v-model="email" />
-		<span>密碼:</span
-		><input type="text" placeholder="請輸入密碼" v-model.number="password" />
-		<input type="button" value="送出" @click="userLogin" />
-		<slot />
+	<div class="login">
+		<div class="login-user"></div>
+		<div class="loggin-User">
+			<img src="https://i.imgur.com/GLu6bgf.png" alt="USER" />
+			<input
+				type="text"
+				placeholder="請輸入帳號"
+				v-model="email"
+				style="margin-bottom: 10px"
+			/><br />
+			<input
+				type="text"
+				placeholder="請輸入密碼"
+				v-model.number="password"
+				style="margin-bottom: 10px"
+			/><br />
+			<button @click="userLogin" class="login-btn">送出</button>
+			<slot />
+		</div>
 	</div>
 </template>
 
@@ -22,7 +34,6 @@ export default {
 
 	methods: {
 		userLogin() {
-			this.$router.push("/mainview");
 			let data = JSON.parse(JSON.stringify(this.user));
 			let data2 = data.some(
 				(item) => item.email === this.email && item.password === this.password
@@ -50,3 +61,52 @@ export default {
 	},
 };
 </script>
+
+<style>
+.login {
+	width: 1264px;
+	height: 610px;
+	background-image: url(https://i.imgur.com/Fy4mlRH.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+.login-user {
+	position: absolute;
+	background-color: deepskyblue;
+	width: 300px;
+	height: 350px;
+	opacity: 0.3;
+	border-radius: 10px;
+	top: 100px;
+	left: 450px;
+}
+.loggin-User {
+	position: absolute;
+	z-index: 100;
+	top: 300px;
+	left: 500px;
+}
+.loggin-User > input {
+	padding: 5px 15px;
+	background-color: lavender;
+	border: 0 none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.loggin-User > img {
+	position: absolute;
+	bottom: 100px;
+	left: 20px;
+	width: 200px;
+	height: 200px;
+}
+.loggin-User > button {
+	margin-left: 65px;
+	padding: 5px 15px;
+	background-color: lavender;
+	border: 0 none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+</style>
